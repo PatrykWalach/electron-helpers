@@ -27,7 +27,7 @@ export const generateEmitHooks: GenerateEmit = <T>(key: string) => {
 
 type CreateEmit = (ipcMain: IpcMain) => () => boolean
 
-type CreateEmitT<T> = <T>(ipcMain: IpcMain) => (arg: T) => boolean
+type CreateEmitT<T> = (ipcMain: IpcMain) => (arg: T) => boolean
 
 type Unsubscribe = () => IpcRenderer
 
@@ -35,9 +35,9 @@ type CreateRendererOn = (
   ipcRenderer: IpcRenderer,
 ) => (handle: (event: IpcRendererEvent) => void) => Unsubscribe
 
-type CreateRendererOnT<T> = <T>(
+type CreateRendererOnT<T> = (
   ipcRenderer: IpcRenderer,
-) => (handle: (event: IpcRendererEvent) => void, arg: T) => Unsubscribe
+) => (handle: (event: IpcRendererEvent, arg: T) => void) => Unsubscribe
 
 interface GenerateEmit {
   (key: string): {
